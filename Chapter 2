@@ -1,0 +1,70 @@
+2.10 Exercises
+Exercise 2.1. Repeating my advice from the previous chapter, whenever you learn a new feature,
+you should try it out in interactive mode and make errors on purpose to see what goes wrong.
+• We’ve seen that n = 42 is legal. What about 42 = n?
+>>> 42 = n
+  File "<stdin>", line 1
+    42 = n
+    ^^
+SyntaxError: cannot assign to literal here. Maybe you meant '==' instead of '='?
+• How about x = y = 1?
+>>> x = y = 1
+• In some languages every statement ends with a semi-colon, ;. What happens if you put a
+semi-colon at the end of a Python statement?
+>>> x = y = 1;
+• What if you put a period at the end of a statement?
+>>> x = y = 1.
+• In math notation you can multiply x and y like this: xy. What happens if you try that in
+Python?
+>>> x = y = 1.
+>>> xy
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'xy' is not defined. Did you mean: 'x'?
+Exercise 2.2. Practice using the Python interpreter as a calculator:
+1. The volume of a sphere with radius r is (4/3)*pi*r**3. What is the volume of a sphere with radius 5?
+>>> pi = 3.141592653589793
+>>> (4/3) * pi * 5**3
+523.5987755982989
+2. Suppose the cover price of a book is $24.95, but bookstores get a 40% discount. Shipping costs
+$3 for the first copy and 75 cents for each additional copy. What is the total wholesale cost for
+60 copies?
+>>> copies = 60
+>>> price = 24.95 * (1 - (40/100))
+>>> shipping = 3 + (copies - 1) * 0.75
+>>> round(copies * price + shipping, 2)
+945.45
+3. If I leave my house at 6:52 am and run 1 mile at an easy pace (8:15 per mile), then 3 miles at
+tempo (7:12 per mile) and 1 mile at easy pace again, what time do I get home for breakfast?
+# Time taken for each segment in minutes:seconds format
+easy_pace_time = 8 * 60 + 15
+tempo_pace_time = 7 * 60 + 12
+
+# Total time taken for the run in seconds
+total_time_seconds = 2 * easy_pace_time + 3 * tempo_pace_time
+
+# Convert total time to hours, minutes, and seconds
+total_hours = total_time_seconds // 3600
+total_minutes = (total_time_seconds % 3600) // 60
+total_seconds = total_time_seconds % 60
+
+# Starting time
+start_hour = 6
+start_minute = 52
+
+# Add total time to starting time
+end_hour = start_hour + total_hours
+end_minute = start_minute + total_minutes
+end_second = total_seconds
+
+# Adjust end time if minutes or seconds exceed 60
+if end_minute >= 60:
+    end_hour += 1
+    end_minute -= 60
+
+# Format the end time
+end_time = "{:02d}:{:02d}:{:02d}".format(end_hour, end_minute, end_second)
+
+print("You'll get home for breakfast at", end_time)
+
+You'll get home for breakfast at 07:30:06
